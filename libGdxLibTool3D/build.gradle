@@ -1,0 +1,29 @@
+apply plugin: "java"
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.wangGame'
+
+sourceCompatibility = 1.8
+sourceSets.main.java.srcDirs = [
+        "src"
+]
+
+dependencies {
+    implementation "com.badlogicgames.gdx:gdx-bullet:1.13.1"
+    implementation 'com.github.wangGame.LibGdxTool:libGdx:release2.0.1'
+    implementation 'com.github.wangGame.LibGdxTool:libGdxLib:release2.0.1'
+    implementation 'com.github.wangGame.LibGdxTool:libGdxLib3D:release2.0.1'
+}
+
+// 指定编码
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+// 打包源码
+task sourcesJar(type: Jar) {
+    from sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+artifacts {
+    archives sourcesJar
+}

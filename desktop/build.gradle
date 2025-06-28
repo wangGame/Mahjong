@@ -1,0 +1,51 @@
+apply plugin: "java"
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.wangGame'
+
+sourceSets.main.java.srcDirs = [ "src/" ]
+sourceSets.main.resources.srcDirs = ["../android/assets"]
+sourceCompatibility = 1.8
+
+dependencies {
+
+    // https://mvnrepository.com/artifact/com.badlogicgames.gdx/gdx-bullet
+    implementation "com.badlogicgames.gdx:gdx-bullet:1.13.1"
+//    implementation ("com.badlogicgames.gdx-controllers:gdx-controllers-core:2.2.1")
+//    implementation files('libs/gdx-backend-lwjgl.jar')
+//    implementation files('libs/gdx-backend-lwjgl-natives.jar')
+//    implementation files('libs/gdx-natives.jar')
+    implementation 'com.github.wangGame.LibGdxTool:libGdx:release2.0.1'
+    implementation 'com.github.wangGame.LibGdxTool:libGdxLib:release2.0.1'
+//    implementation 'com.github.wangGame.LibGdxTool:desktop:release2.0.1'
+    implementation project(":libGdxLibTool3D")
+    implementation 'junit:junit:4.12'
+//    implementation "com.github.tommyettinger:textratypist:0.6.3"
+    implementation "com.badlogicgames.gdx:gdx-bullet-platform:1.13.1:natives-desktop"
+    implementation "com.badlogicgames.gdx:gdx-backend-lwjgl:1.13.1"
+    implementation "com.badlogicgames.gdx:gdx-platform:1.13.1:natives-desktop"
+
+    implementation "com.github.mgsx-dev.gdx-gltf:gltf:2.2.1"
+
+    compile "com.badlogicgames.gdx:gdx-controllers:1.9.10:sources"
+    compile "com.badlogicgames.gdx:gdx-controllers-gwt:1.9.10"
+    compile "com.badlogicgames.gdx:gdx-controllers-gwt:1.9.10:sources"
+
+    compile "com.badlogicgames.gdx:gdx-controllers-desktop:1.9.10"
+    compile "com.badlogicgames.gdx:gdx-controllers-platform:1.9.10:natives-desktop"
+
+}
+
+project.ext.mainClassName = "com.tony.puzzle.DesktopLauncher"
+project.ext.assetsDir = new File("../android/assets");
+
+task dist(type: Jar) {
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+    manifest {
+        attributes 'Main-Class': project.mainClassName
+    }
+    dependsOn configurations.runtimeClasspath
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    with jar
+}
