@@ -109,7 +109,11 @@ public class BaseActor3DGroup extends BaseActor3D{
         Ray localRay = new Ray(ray.origin.cpy().mul(inv), ray.direction.cpy().mul(inv));
         super.checkCollision(localRay,rayBean);
         for (BaseActor3D actor : actor3DS) {
-            actor.checkCollision(localRay, rayBean);
+            if (actor instanceof BaseActor3DGroup){
+                ((BaseActor3DGroup)(actor)).checkCollisions(localRay,rayBean);
+            }else {
+                actor.checkCollision(localRay, rayBean);
+            }
         }
         return null;
     }

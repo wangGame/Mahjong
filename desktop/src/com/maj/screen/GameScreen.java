@@ -33,6 +33,7 @@ import com.maj.view.MahJItem;
  */
 public class GameScreen extends BaseScreen3D {
     private BaseActor3D selectActor;
+    private MahJItem mahJItem[][][];
     public GameScreen(BaseGame game) {
         super(game);
     }
@@ -72,7 +73,7 @@ public class GameScreen extends BaseScreen3D {
                     for (int i2 = 0; i2 < s.length(); i2++) {
                         if (s.charAt(i2) == '1') {
                             MahJItem model = createModel(i2, i1, i3);
-                            stage3D.addActor(model);
+                            gr.addActor3D(model);
                             tilesAll.add(model);
                         }
                     }
@@ -106,15 +107,30 @@ public class GameScreen extends BaseScreen3D {
                     Vector3 position2 = getPosition();
                     float xx = (position1.x + position2.x) / 2f;
                     float yy = (position1.z + position2.z) / 2f;
-                    if (position1.x<position2.x){
-                        selectActor.addAction(
-
-                                        Action3Ds.moveToAction3D(   xx - 1.5f,5,yy,0.3f, Interpolation.fastSlow) );
-                        this.addAction(Action3Ds.moveToAction3D(          xx+ 1.5f,5,yy,0.3f, Interpolation.fastSlow));
-                    }else {
-                        selectActor.addAction(Action3Ds.moveToAction3D(   xx + 1.5f,5,yy,0.3f, Interpolation.fastSlow));
-                        this.addAction(Action3Ds.moveToAction3D(          xx - 1.5f,5,yy,0.3f, Interpolation.fastSlow));
-                    }
+                    selectActor.addAction(
+                            Action3Ds.sequenceAction3D(
+                                Action3Ds.moveToAction3D(   xx - 1.5f,5,yy,0.2f, Interpolation.fastSlow),
+                                    Action3Ds.moveToAction3D(   xx-1,5,yy,0.0333f, Interpolation.slowFast)
+                                    )
+                    );
+                    this.addAction(
+                            Action3Ds.sequenceAction3D(
+                                Action3Ds.moveToAction3D(          xx+ 1.5f,5,yy,0.2f, Interpolation.fastSlow),
+                                    Action3Ds.moveToAction3D(          xx+ 1,5,yy,0.0333f, Interpolation.slowFast)
+                                    )
+                    );
+//                    if (position1.x<position2.x){
+//                        selectActor.addAction(
+//
+//                                        Action3Ds.moveToAction3D(   xx - 1.5f,5,yy,0.3f, Interpolation.fastSlow)
+//
+//
+//                        );
+//                        this.addAction(Action3Ds.moveToAction3D(          xx+ 1.5f,5,yy,0.3f, Interpolation.fastSlow));
+//                    }else {
+//                        selectActor.addAction(Action3Ds.moveToAction3D(   xx + 1.5f,5,yy,0.3f, Interpolation.fastSlow));
+//                        this.addAction(Action3Ds.moveToAction3D(          xx - 1.5f,5,yy,0.3f, Interpolation.fastSlow));
+//                    }
                     selectActor = null;
                 }
                 setColor(Color.GRAY);
