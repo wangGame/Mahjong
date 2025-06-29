@@ -61,4 +61,12 @@ public class Action3Ds extends Actions {
         }
         return parallelAction3D;
     }
+
+    static public SequenceAction3D sequenceAction3D(Action3D... action){
+        SequenceAction3D sequenceAction3D = new SequenceAction3D();
+        for (Action3D action3Ds : action) {
+            sequenceAction3D.addAction(action3Ds);
+        }
+        return sequenceAction3D;
+    }
 }

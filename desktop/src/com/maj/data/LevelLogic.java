@@ -8,21 +8,25 @@ import com.maj.view.MahJItem;
  * Date on 2025/6/29.
  */
 public class LevelLogic {
-    public void getTowItems(Array<MahJItem> mahJItems){
+    public Array<MahJItem> getTowItems(Array<MahJItem> mahJItems){
         Array<MahJItem> copyItems = new Array<>();
         Array<MahJItem> outMaj = new Array<>();
-        Array<MahJItem> outMajGHz = new Array<>();
+
+        copyItems.addAll(mahJItems);
         if (mahJItems.size>=3) {
             {
-                int size = outMaj.size;
-                int index = (int) (Math.random() * (size - 1) + 1);
-                outMajGHz.add(copyItems.get(index));
+                int size = copyItems.size;
+                int index = (int) (Math.random() * (size - 2) + 1);
+                outMaj.add(copyItems.get(index));
                 copyItems.removeIndex(index);
             }
             {
                 MahJItem random = copyItems.random();
                 outMaj.add(random);
             }
+        }else {
+            outMaj.addAll(copyItems);
         }
+        return outMaj;
     }
 }

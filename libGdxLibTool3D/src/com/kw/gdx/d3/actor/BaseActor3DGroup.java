@@ -71,22 +71,6 @@ public class BaseActor3DGroup extends BaseActor3D{
         return actorMatrix;
     }
 
-////    /** Returns the transform for this group's coordinate system. */
-//    public Matrix4 computeTransform () {
-//        Matrix4 worldTransform = this.worldTransform;
-//        Vector3 position = getPosition();
-//        worldTransform.translate(position.x,position.y,position.z);
-//        Quaternion rotation = getRotation();
-//        worldTransform.rotate(rotation);
-//        Vector3 scale = getScale();
-//        worldTransform.scale(scale.x,scale.y,scale.z);
-//        if (parent3D!=null) {
-//            worldTransform.mul(parent3D.worldTransform);
-//        }
-//        computedTransform.set(worldTransform);
-//        worldTransform.idt();
-//        return computedTransform;
-//    }
 
     public void addActor3D(BaseActor3D ba) {
         ba.remove();
