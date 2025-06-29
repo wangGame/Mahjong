@@ -84,11 +84,11 @@ public class GameScreen extends BaseScreen3D {
         LevelLogic levelLogic = new LevelLogic();
         int suit = 0;
         while (tempAll.size>0) {
-            suit++;
             Array<MahJItem> towItems = levelLogic.getTowItems(tempAll);
             for (MahJItem towItem : towItems) {
                 towItem.setSuit(suit);
             }
+            suit++;
             tempAll.removeAll(towItems,false);
         }
     }
@@ -106,11 +106,10 @@ public class GameScreen extends BaseScreen3D {
                     Vector3 position2 = getPosition();
                     float xx = (position1.x + position2.x) / 2f;
                     float yy = (position1.z + position2.z) / 2f;
-                    if (position1.x>position2.x){
+                    if (position1.x<position2.x){
                         selectActor.addAction(
-                                Action3Ds.sequenceAction3D(
-                                        Action3Ds.moveToAction3D(   xx - 1.5f,5,yy,0.3f, Interpolation.fastSlow),
-                                        Action3Ds.moveToAction3D(   xx - 1f,5,yy,0.1f, Interpolation.fastSlow)));
+
+                                        Action3Ds.moveToAction3D(   xx - 1.5f,5,yy,0.3f, Interpolation.fastSlow) );
                         this.addAction(Action3Ds.moveToAction3D(          xx+ 1.5f,5,yy,0.3f, Interpolation.fastSlow));
                     }else {
                         selectActor.addAction(Action3Ds.moveToAction3D(   xx + 1.5f,5,yy,0.3f, Interpolation.fastSlow));
