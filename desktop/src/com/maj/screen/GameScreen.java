@@ -44,7 +44,7 @@ public class GameScreen extends BaseScreen3D {
         Model bgModel = Asset3D.getAsset3D().getModel("maj/table.g3db");
         ModelActor3D tableActor3D = new ModelActor3D(bgModel);
         stage3D.addActor(tableActor3D);
-        tableActor3D.setPosition(0,-7,0);
+        tableActor3D.setPosition(0,-1,0);
         tableActor3D.setScale(4,1,4);
 
         Texture woodTexture = Asset.getAsset().getTexture("maj/Plate_Normal.png");
