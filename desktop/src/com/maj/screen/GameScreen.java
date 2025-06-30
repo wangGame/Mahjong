@@ -102,38 +102,55 @@ public class GameScreen extends BaseScreen3D {
                 super.touchUp(vector3, pointer, button);
                 if (selectActor == null){
                     selectActor = this;
+                    setColor(Color.GRAY);
                 }else {
+                    if (selectActor == this){
+                        setColor(Color.WHITE);
+                        return;
+                    }
+                    selectActor.setColor(Color.WHITE);
                     Vector3 position1 = selectActor.getPosition();
                     Vector3 position2 = getPosition();
                     float xx = (position1.x + position2.x) / 2f;
                     float yy = (position1.z + position2.z) / 2f;
-                    selectActor.addAction(
-                            Action3Ds.sequenceAction3D(
-                                Action3Ds.moveToAction3D(   xx - 1.5f,5,yy,0.2f, Interpolation.fastSlow),
-                                    Action3Ds.moveToAction3D(   xx-1,5,yy,0.0333f, Interpolation.slowFast)
-                                    )
-                    );
-                    this.addAction(
-                            Action3Ds.sequenceAction3D(
-                                Action3Ds.moveToAction3D(          xx+ 1.5f,5,yy,0.2f, Interpolation.fastSlow),
-                                    Action3Ds.moveToAction3D(          xx+ 1,5,yy,0.0333f, Interpolation.slowFast)
-                                    )
-                    );
-//                    if (position1.x<position2.x){
-//                        selectActor.addAction(
-//
-//                                        Action3Ds.moveToAction3D(   xx - 1.5f,5,yy,0.3f, Interpolation.fastSlow)
-//
-//
-//                        );
-//                        this.addAction(Action3Ds.moveToAction3D(          xx+ 1.5f,5,yy,0.3f, Interpolation.fastSlow));
-//                    }else {
-//                        selectActor.addAction(Action3Ds.moveToAction3D(   xx + 1.5f,5,yy,0.3f, Interpolation.fastSlow));
-//                        this.addAction(Action3Ds.moveToAction3D(          xx - 1.5f,5,yy,0.3f, Interpolation.fastSlow));
-//                    }
+
+                    if (position1.x<position2.x){
+                        selectActor.addAction(
+                                Action3Ds.sequenceAction3D(
+                                        Action3Ds.moveToAction3D(   xx - 1.5f,5,yy,0.2f, Interpolation.fastSlow),
+                                        Action3Ds.moveToAction3D(   xx-1,5,yy,0.0333f, Interpolation.slowFast),
+                                        Action3Ds.delay3D(0.4f),
+                                        Action3Ds.remove3D()
+                                )
+                        );
+                        this.addAction(
+                                Action3Ds.sequenceAction3D(
+                                        Action3Ds.moveToAction3D(          xx+ 1.5f,5,yy,0.2f, Interpolation.fastSlow),
+                                        Action3Ds.moveToAction3D(          xx+ 1,5,yy,0.0333f, Interpolation.slowFast),
+                                        Action3Ds.delay3D(0.4f),
+                                        Action3Ds.remove3D()
+                                )
+                        );
+                    }else {
+                        selectActor.addAction(
+                                Action3Ds.sequenceAction3D(
+                                        Action3Ds.moveToAction3D(   xx + 1.5f,5,yy,0.2f, Interpolation.fastSlow),
+                                        Action3Ds.moveToAction3D(   xx+1,5,yy,0.0333f, Interpolation.exp5In),
+                                        Action3Ds.delay3D(0.4f),
+                                        Action3Ds.remove3D()
+                                )
+                        );
+                        this.addAction(
+                                Action3Ds.sequenceAction3D(
+                                        Action3Ds.moveToAction3D(          xx- 1.5f,5,yy,0.2f, Interpolation.fastSlow),
+                                        Action3Ds.moveToAction3D(          xx- 1,5,yy,0.0333f, Interpolation.slowFast),
+                                        Action3Ds.delay3D(0.4f),
+                                        Action3Ds.remove3D()
+                                )
+                        );
+                    }
                     selectActor = null;
                 }
-                setColor(Color.GRAY);
             }
         };
         actor3D.setScale(1,1,1);

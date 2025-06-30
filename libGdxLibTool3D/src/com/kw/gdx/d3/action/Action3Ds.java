@@ -2,6 +2,7 @@ package com.kw.gdx.d3.action;
 
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
@@ -63,10 +64,21 @@ public class Action3Ds extends Actions {
     }
 
     static public SequenceAction3D sequenceAction3D(Action3D... action){
-        SequenceAction3D sequenceAction3D = new SequenceAction3D();
+        SequenceAction3D sequenceAction3D = action3D(SequenceAction3D.class);
         for (Action3D action3Ds : action) {
             sequenceAction3D.addAction(action3Ds);
         }
         return sequenceAction3D;
+    }
+
+    static public RemoveActorAction3D remove3D(){
+        RemoveActorAction3D removeActorAction3D = action3D(RemoveActorAction3D.class);
+        return removeActorAction3D;
+    }
+
+    static public DelayAction3D delay3D(float time){
+        DelayAction3D action3D = action3D(DelayAction3D.class);
+        action3D.setDuration(time);
+        return action3D;
     }
 }
