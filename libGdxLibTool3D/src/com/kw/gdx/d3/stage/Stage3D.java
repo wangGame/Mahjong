@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g3d.decals.DecalBatch;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalShadowLight;
 import com.badlogic.gdx.graphics.g3d.environment.PointLight;
+import com.badlogic.gdx.graphics.g3d.environment.ShadowMap;
 import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.graphics.g3d.utils.DefaultShaderProvider;
@@ -90,7 +91,7 @@ public class Stage3D extends InputAdapter {
 
     protected void initCamera() {
         camera = new PerspectiveCamera(20, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        camera.position.set(0f, 120, 120f);
+        camera.position.set(0f, 120, 40f);
         camera.lookAt(0,0,0);
 
         camera.near = 0.3f;
@@ -99,11 +100,13 @@ public class Stage3D extends InputAdapter {
     }
 
     protected void initLight() {
-        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 1f, 1f, 1f, 1f));//环境光
+//        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.1f, 0.1f, 0.1f, 1f));//环境光
         //投影
-        environment.add((shadowLight = new DirectionalShadowLight(1024, 1024, 300f, 300f, 1f, 100f)).set(0.8f, 0.8f, 0.8f, -1f, -.8f, -.2f));
+        shadowLight = new DirectionalShadowLight(1024, 1024, 300f, 300f,
+                1f, 100f);
+//        environment.add();
 //        environment.shadowMap = (ShadowMap) shadowLight;
-        DirectionalLight set = new DirectionalLight().set(1f, 1f, 1f, 30, -30, 1);
+        DirectionalLight set = new DirectionalLight().set(0.5f, 0.5f, 0.5f, 30, -30, 1);
         float intensity = 0.2f;
         Color color = Color.valueOf("#FFF4D6");
         color.r = color.r * intensity;
@@ -112,8 +115,14 @@ public class Stage3D extends InputAdapter {
         color.a = 0.1f;
         set.setColor(color);
 //        environment.add(set);
-        PointLight set1 = new PointLight().set(1.0f, 0f, 0f, 0.0f, 4.0f, 0.0f, 1140.3f);
-//        environment.add(set1);
+        PointLight set1 = new PointLight().set(0.5f, .5f, 0.5f, 10.0f, 20.0f, 0.0f, 220.3f);
+        PointLight set2 = new PointLight().set(0.5f, .5f, 0.5f, -10.0f, 20.0f, 0.0f, 220.3f);
+        PointLight set3 = new PointLight().set(0.5f, .5f, 0.5f, 10.0f, 20.0f, -10.0f, 220.3f);
+
+        environment.add(set1);
+        environment.add(set2);
+        environment.add(set3);
+
     }
 
     public void act(float dt) {
@@ -123,11 +132,11 @@ public class Stage3D extends InputAdapter {
     }
 
     public void draw() {
-//        shadowLight.begin(Vector3.Zero, camera.direction);
-//        shadowBatch.begin(shadowLight.getCamera());
-//        gameRoot.drawShadow(shadowBatch,environment);
-//        shadowBatch.end();
-//        shadowLight.end();
+        shadowLight.begin(Vector3.Zero, camera.direction);
+        shadowBatch.begin(shadowLight.getCamera());
+        gameRoot.drawShadow(shadowBatch,environment);
+        shadowBatch.end();
+        shadowLight.end();
 //        Gdx.gl.glClearColor(0, 0, 0, 1);
         modelBatch.begin(camera);
         gameRoot.draw(modelBatch, environment);

@@ -41,17 +41,47 @@ public class GameScreen extends BaseScreen3D {
     @Override
     public void initView() {
         super.initView();
+        {
+            Model bgModel = Asset3D.getAsset3D().getModel("maj/table.g3db");
+            ModelActor3D tableActor3D = new ModelActor3D(bgModel);
+            stage3D.addActor(tableActor3D);
+            tableActor3D.setPosition(0, -0.5f, 0);
+            tableActor3D.setScale(6, 1, 6);
 
-        Model bgModel = Asset3D.getAsset3D().getModel("maj/table.g3db");
-        ModelActor3D tableActor3D = new ModelActor3D(bgModel);
-        stage3D.addActor(tableActor3D);
-        tableActor3D.setPosition(0,-1,0);
-        tableActor3D.setScale(4,1,4);
+            Texture woodTexture = Asset.getAsset().getTexture("maj/wood.png");
+            woodTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+            woodTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+            tableActor3D.setMaterialTexture(woodTexture);
+        }
+        {
+            Model bgModel = Asset3D.getAsset3D().getModel("maj/teacup.g3db");
+            ModelActor3D tableActor3D = new ModelActor3D(bgModel);
+            stage3D.addActor(tableActor3D);
+            tableActor3D.setPosition(0, -0.5f, -15);
 
-        Texture woodTexture = Asset.getAsset().getTexture("maj/Plate_Normal.png");
-        woodTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-        woodTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        tableActor3D.setMaterialTexture(woodTexture);
+
+            Texture woodTexture = Asset.getAsset().getTexture("maj/Plate_AlbedoTransparency.png");
+            woodTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+            woodTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+            tableActor3D.setMaterialTexture(woodTexture);
+        }
+
+
+        {
+            Model bgModel = Asset3D.getAsset3D().getModel("maj/teapot.g3db");
+            ModelActor3D tableActor3D = new ModelActor3D(bgModel);
+            stage3D.addActor(tableActor3D);
+            tableActor3D.setPosition(0, -0.5f, 15);
+
+
+            Texture woodTexture = Asset.getAsset().getTexture("maj/Plate_AlbedoTransparency.png");
+            woodTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+            woodTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+            tableActor3D.setMaterialTexture(woodTexture);
+        }
+
+
+
 
 
 
