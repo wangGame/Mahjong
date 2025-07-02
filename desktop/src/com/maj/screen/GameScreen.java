@@ -148,16 +148,18 @@ public class GameScreen extends BaseScreen3D {
                         selectActor.addAction(
                                 Action3Ds.sequenceAction3D(
                                         Action3Ds.moveToAction3D(   xx - 1.5f,5,yy,0.2f, Interpolation.fastSlow),
+                                        Action3Ds.delay3D(0.1f),
                                         Action3Ds.moveToAction3D(   xx-1,5,yy,0.0333f, Interpolation.slowFast),
-                                        Action3Ds.delay3D(0.4f),
+                                        Action3Ds.color3D(Color.valueOf("#11111100"),10.2f),
                                         Action3Ds.remove3D()
                                 )
                         );
                         this.addAction(
                                 Action3Ds.sequenceAction3D(
                                         Action3Ds.moveToAction3D(          xx+ 1.5f,5,yy,0.2f, Interpolation.fastSlow),
+                                        Action3Ds.delay3D(0.1f),
                                         Action3Ds.moveToAction3D(          xx+ 1,5,yy,0.0333f, Interpolation.slowFast),
-                                        Action3Ds.delay3D(0.4f),
+                                        Action3Ds.color3D(Color.valueOf("#11111100"),10.2f),
                                         Action3Ds.remove3D()
                                 )
                         );
@@ -165,16 +167,18 @@ public class GameScreen extends BaseScreen3D {
                         selectActor.addAction(
                                 Action3Ds.sequenceAction3D(
                                         Action3Ds.moveToAction3D(   xx + 1.5f,5,yy,0.2f, Interpolation.fastSlow),
+                                        Action3Ds.delay3D(0.1f),
                                         Action3Ds.moveToAction3D(   xx+1,5,yy,0.0333f, Interpolation.exp5In),
-                                        Action3Ds.delay3D(0.4f),
+                                        Action3Ds.color3D(Color.valueOf("#11111100"),10.2f),
                                         Action3Ds.remove3D()
                                 )
                         );
                         this.addAction(
                                 Action3Ds.sequenceAction3D(
                                         Action3Ds.moveToAction3D(          xx- 1.5f,5,yy,0.2f, Interpolation.fastSlow),
+                                        Action3Ds.delay3D(0.1f),
                                         Action3Ds.moveToAction3D(          xx- 1,5,yy,0.0333f, Interpolation.slowFast),
-                                        Action3Ds.delay3D(0.4f),
+                                        Action3Ds.color3D(Color.valueOf("#11111100"),10.2f),
                                         Action3Ds.remove3D()
                                 )
                         );

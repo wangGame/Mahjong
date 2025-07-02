@@ -1,7 +1,9 @@
 package com.kw.gdx.d3.action;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
 import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
 import com.badlogic.gdx.utils.Pool;
@@ -78,6 +80,14 @@ public class Action3Ds extends Actions {
 
     static public DelayAction3D delay3D(float time){
         DelayAction3D action3D = action3D(DelayAction3D.class);
+        action3D.setDuration(time);
+        return action3D;
+    }
+
+
+    public static Action3D color3D(Color color,float time) {
+        ColorAction3D action3D = new ColorAction3D();
+        action3D.setEndColor(color);
         action3D.setDuration(time);
         return action3D;
     }

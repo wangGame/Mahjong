@@ -100,28 +100,21 @@ public class Stage3D extends InputAdapter {
     }
 
     protected void initLight() {
-//        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.1f, 0.1f, 0.1f, 1f));//环境光
+        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.1f, 0.1f, 0.1f, 1f));//环境光
         //投影
         shadowLight = new DirectionalShadowLight(1024, 1024, 300f, 300f,
                 1f, 100f);
 //        environment.add();
 //        environment.shadowMap = (ShadowMap) shadowLight;
         DirectionalLight set = new DirectionalLight().set(0.5f, 0.5f, 0.5f, 30, -30, 1);
-        float intensity = 0.2f;
+        float intensity = 1;
         Color color = Color.valueOf("#FFF4D6");
         color.r = color.r * intensity;
         color.g = color.g * intensity;
         color.b = color.b * intensity;
-        color.a = 0.1f;
-        set.setColor(color);
-//        environment.add(set);
-        PointLight set1 = new PointLight().set(0.5f, .5f, 0.5f, 10.0f, 20.0f, 0.0f, 220.3f);
-        PointLight set2 = new PointLight().set(0.5f, .5f, 0.5f, -10.0f, 20.0f, 0.0f, 220.3f);
-        PointLight set3 = new PointLight().set(0.5f, .5f, 0.5f, 10.0f, 20.0f, -10.0f, 220.3f);
 
-        environment.add(set1);
-        environment.add(set2);
-        environment.add(set3);
+        set.setColor(color);
+        environment.add(set);
 
     }
 

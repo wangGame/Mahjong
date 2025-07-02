@@ -27,6 +27,8 @@ import com.badlogic.gdx.utils.Array;
 import com.kw.gdx.d3.bean.RayBean;
 import com.kw.gdx.d3.stage.Stage3D;
 
+import javax.swing.text.AttributeSet;
+
 public class ModelActor3D extends BaseActor3D {
     private Matrix4 resourceMax = new Matrix4();
     protected ModelInstance modelInstance;
@@ -51,6 +53,8 @@ public class ModelActor3D extends BaseActor3D {
         setPosition(x,y,z);
         this.decals = new Array<>();
     }
+
+
 
     public void setModelInstance(ModelInstance modelInstance) {
         this.modelInstance = modelInstance;
@@ -93,8 +97,12 @@ public class ModelActor3D extends BaseActor3D {
     }
 
     public void setColor(Color c) {
-        for (Material m : modelInstance.materials)
-            m.set(ColorAttribute.createDiffuse(c));
+        for (Material m : modelInstance.materials){
+            if (m instanceof AttributeSet.ColorAttribute) {
+                (AttributeSet.ColorAttribute)(m)).v
+            }
+        }
+//            m.set(ColorAttribute.createDiffuse(c));
     }
 
     public void buildModel(float width, float height, float depth, boolean blending) {

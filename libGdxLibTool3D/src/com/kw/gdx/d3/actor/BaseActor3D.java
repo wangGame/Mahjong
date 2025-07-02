@@ -61,6 +61,7 @@ public class BaseActor3D {
         this.checkCollisionV3 = new Vector3();
         this.isDity = true;
         this.isVisible = true;
+        this.color = new Color(1,1,1,1);
     }
 
     public Matrix4 getActorMatrix() {
@@ -127,6 +128,10 @@ public class BaseActor3D {
 
     public void setColor(Color c) {
         this.color.set(c.r,c.g,c.b,c.a);
+    }
+
+    public Color getColor() {
+        return color;
     }
 
     public Vector3 getPosition() {
