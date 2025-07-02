@@ -38,4 +38,41 @@ public class MahJItem extends ModelActor3D {
     public int getSuit() {
         return suit;
     }
+
+    private int posx;
+    private int posy;
+    private int posz;
+    public void setArrPos(int posx, int posy, int posz) {
+        this.posx = posx;
+        this.posy = posy;
+        this.posz = posz;
+    }
+
+    public int getPosx() {
+        return posx;
+    }
+
+    public void setPosx(int posx) {
+        this.posx = posx;
+    }
+
+    public int getPosy() {
+        return posy;
+    }
+
+    public void setPosy(int posy) {
+        this.posy = posy;
+    }
+
+    public int getPosz() {
+        return posz;
+    }
+
+    public void setPosz(int posz) {
+        this.posz = posz;
+    }
+
+    public void setMajNull(MahJItem[][][] mahJItem) {
+        mahJItem[posz][posy][posx] = null;
+    }
 }

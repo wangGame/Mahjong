@@ -12,7 +12,7 @@ import com.kw.gdx.resource.csvanddata.demo.CsvUtils;
  * Date on 2025/6/29.
  */
 public class ReadData {
-    private int cengLine = 15;
+    private int cengLine = 16;
     private String[] allLevel;
     public void read(){
         FileHandle internal = Gdx.files.internal("leveldata/LevelData");
