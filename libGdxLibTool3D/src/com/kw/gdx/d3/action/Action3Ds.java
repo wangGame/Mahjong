@@ -85,9 +85,9 @@ public class Action3Ds extends Actions {
     }
 
 
-    public static Action3D color3D(Color color,float time) {
+    public static Action3D color3D(float a,float time) {
         ColorAction3D action3D = new ColorAction3D();
-        action3D.setEndColor(color);
+        action3D.setA(a);
         action3D.setDuration(time);
         return action3D;
     }

@@ -58,6 +58,8 @@ public class ModelActor3D extends BaseActor3D {
 
     public void setModelInstance(ModelInstance modelInstance) {
         this.modelInstance = modelInstance;
+        Material material = modelInstance.materials.get(0);
+        material.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
         modelInstance.calculateBoundingBox(bounds);
     }
 
@@ -96,13 +98,18 @@ public class ModelActor3D extends BaseActor3D {
         }
     }
 
+
     public void setColor(Color c) {
-        for (Material m : modelInstance.materials){
-            if (m instanceof AttributeSet.ColorAttribute) {
-                (AttributeSet.ColorAttribute)(m)).v
-            }
-        }
+        Material material = modelInstance.materials.get(0);
+        ColorAttribute diffuse = (ColorAttribute)material.get(ColorAttribute.Diffuse);
+        diffuse.color.set(c.r,c.g,c.b,c.a);
 //            m.set(ColorAttribute.createDiffuse(c));
+    }
+
+    public void setColorA(float a) {
+        Material material = modelInstance.materials.get(0);
+        ColorAttribute diffuse = (ColorAttribute)material.get(ColorAttribute.Diffuse);
+        diffuse.color.a = a;
     }
 
     public void buildModel(float width, float height, float depth, boolean blending) {

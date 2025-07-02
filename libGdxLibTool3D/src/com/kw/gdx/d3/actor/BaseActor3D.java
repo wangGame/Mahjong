@@ -3,7 +3,9 @@ package com.kw.gdx.d3.actor;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g3d.Environment;
+import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
+import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.decals.DecalBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Matrix4;
@@ -128,6 +130,10 @@ public class BaseActor3D {
 
     public void setColor(Color c) {
         this.color.set(c.r,c.g,c.b,c.a);
+    }
+
+    public void setColorA(float a) {
+
     }
 
     public Color getColor() {
