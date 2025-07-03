@@ -103,7 +103,7 @@ public class ModelActor3D extends BaseActor3D {
         Material material = modelInstance.materials.get(0);
         ColorAttribute diffuse = (ColorAttribute)material.get(ColorAttribute.Diffuse);
         diffuse.color.set(c.r,c.g,c.b,c.a);
-//            m.set(ColorAttribute.createDiffuse(c));
+
     }
 
     public void setColorA(float a) {

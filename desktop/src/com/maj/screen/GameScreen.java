@@ -153,9 +153,11 @@ public class GameScreen extends BaseScreen3D {
             public void touchUp(Vector3 vector3, int pointer, int button) {
                 super.touchUp(vector3, pointer, button);
                 if (selectActor == null){
+                    if (!isCanTouch())return;
                     selectActor = this;
                     setColor(Color.GRAY);
                 }else {
+                    if (!isCanTouch())return;
                     if (selectActor == this){
                         setColor(Color.WHITE);
                         return;
@@ -178,7 +180,7 @@ public class GameScreen extends BaseScreen3D {
                     if (position1.x<position2.x){
                         selectActor.addAction(
                                 Action3Ds.sequenceAction3D(
-                                        Action3Ds.moveToAction3D(   xx - 1.5f,5,yy,0.2f, Interpolation.fastSlow),
+                                        Action3Ds.moveToAction3D(   position1.x - 1.5f,5,yy,0.2f, Interpolation.fastSlow),
                                         Action3Ds.delay3D(0.1f),
                                         Action3Ds.moveToAction3D(   xx-1,5,yy,0.0333f, Interpolation.slowFast),
                                         Action3Ds.color3D(0,0.2f),
@@ -187,7 +189,7 @@ public class GameScreen extends BaseScreen3D {
                         );
                         this.addAction(
                                 Action3Ds.sequenceAction3D(
-                                        Action3Ds.moveToAction3D(          xx+ 1.5f,5,yy,0.2f, Interpolation.fastSlow),
+                                        Action3Ds.moveToAction3D(          position2.x+ 1.5f,5,yy,0.2f, Interpolation.fastSlow),
                                         Action3Ds.delay3D(0.1f),
                                         Action3Ds.moveToAction3D(          xx+ 1,5,yy,0.0333f, Interpolation.slowFast),
                                         Action3Ds.color3D(0,0.2f),
@@ -197,7 +199,7 @@ public class GameScreen extends BaseScreen3D {
                     }else {
                         selectActor.addAction(
                                 Action3Ds.sequenceAction3D(
-                                        Action3Ds.moveToAction3D(   xx + 1.5f,5,yy,0.2f, Interpolation.fastSlow),
+                                        Action3Ds.moveToAction3D(   position1.x + 1.5f,5,yy,0.2f, Interpolation.fastSlow),
                                         Action3Ds.delay3D(0.1f),
                                         Action3Ds.moveToAction3D(   xx+1,5,yy,0.0333f, Interpolation.exp5In),
                                         Action3Ds.color3D(00,0.2f),
@@ -206,7 +208,7 @@ public class GameScreen extends BaseScreen3D {
                         );
                         this.addAction(
                                 Action3Ds.sequenceAction3D(
-                                        Action3Ds.moveToAction3D(          xx- 1.5f,5,yy,0.2f, Interpolation.fastSlow),
+                                        Action3Ds.moveToAction3D(          position2.x- 1.5f,5,yy,0.2f, Interpolation.fastSlow),
                                         Action3Ds.delay3D(0.1f),
                                         Action3Ds.moveToAction3D(          xx- 1,5,yy,0.0333f, Interpolation.slowFast),
                                         Action3Ds.color3D(0,0.2f),

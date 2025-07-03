@@ -11,32 +11,7 @@ import java.util.List;
  * Date on 2025/7/2.
  */
 public class MahjongUtils {
-    public static class MahjongPosition {
-        public int layer;
-        public int row;
-        public int col;
-
-        public MahjongPosition(int layer, int row, int col) {
-            this.layer = layer;
-            this.row = row;
-            this.col = col;
-        }
-
-        @Override
-        public String toString() {
-            return "Layer: " + layer + ", Row: " + row + ", Col: " + col;
-        }
-    }
-
-    /**
-     * 获取可点击（可以出的）麻将列表
-     *
-     * @param board 三维麻将数组
-     * @return 可点击麻将位置列表
-     */
     public static void getClickableTiles(MahJItem[][][] board) {
-
-
         int layers = board.length;
         int rows = board[0].length;
         int cols = board[0][0].length;
@@ -47,74 +22,63 @@ public class MahjongUtils {
                     MahJItem mahJItem = board[z][y][x];
                     if (mahJItem != null) {
                         // 1. 检查是否被上方盖住
-                        if (isCovered(board, x, y, z)) {
-                            mahJItem.setColor(Color.BLACK);
+                        if (isCovered(board, z, y, x)) {
+                            mahJItem.setCannotMove();
                             continue;
                         }
 
-                        // 2. 检查是否左右有空间滑出
-                        if (canSlideOut(board, x, y, z)) {
-                            mahJItem.setColor(Color.WHITE);
-                        }else {
-                            mahJItem.setColor(Color.BLACK);
+//                        // 2. 检查是否左右有空间滑出
+//                        if (canSlideOut(board, x, y, z)) {
+//                            mahJItem.setCanMove();
+//                        } else {
+//                            mahJItem.setCannotMove();
+//                        }
 
-                        }
+//                        // 3. 检查该麻将是否可滑动
+//                        if (canMove(board, x, y, z)) {
+//                            mahJItem.setCanMove(); // 假设我们为 MahjongItem 设置一个可以滑动的状态
+//                        } else {
+//                            mahJItem.setCannotMove(); // 如果不能滑动
+//                        }
                     }
                 }
             }
         }
-
-
     }
 
-    /**
-     * 判断当前麻将是否被上方盖住
-     */
     private static boolean isCovered(MahJItem[][][] board, int x, int y, int z) {
-        if (z + 1 >= board.length) {
-            return false;
-        }
-        MahJItem[][] upperLayer = board[z + 1];
+        if(x + 1 <= board.length-1){
+            if (board[x+1][y][z] !=null) {
+                return true;
+            }
 
-        // 偏移为正负 1 都会遮挡当前麻将
-        for (int dy = -1; dy <= 1; dy++) {
-            for (int dx = -1; dx <= 1; dx++) {
-                int nx = x + dx;
-                int ny = y + dy;
-
-                if (nx >= 0 && nx < board[0][0].length && ny >= 0 && ny < board[0].length) {
-                    if (upperLayer[ny][nx] != null) {
-                        return true;
-                    }
+            if (z-1>=0) {
+                if (board[x+1][y][z-1] !=null) {
+                    return true;
                 }
             }
         }
         return false;
     }
 
-    /**
-     * 判断当前麻将是否左右至少有一侧可以滑出
-     */
-    private static boolean canSlideOut(MahJItem[][][] board, int x, int y, int z) {
+    public static boolean canMove(MahJItem[][][] board, int x, int y, int z) {
+        // 获取board的尺寸
         int layers = board.length;
         int rows = board[0].length;
         int cols = board[0][0].length;
 
-        boolean leftFree = false;
-        boolean rightFree = false;
-
-
-
-        // 检查左侧
-        if (x - 2 < 0 || board[z][y][x - 2] == null) {
-            leftFree = true;
+        // 检查麻将是否有效（不为空）
+        if (board[z][y][x] == null) {
+            return false; // 当前麻将无效
         }
 
-        // 检查右侧
-        if (x + 2 >= cols || board[z][y][x + 2] == null) {
-            rightFree = true;
-        }
+        // 检查向四个方向（上下左右）是否有空位可以滑动
+        boolean canMoveUp = (z > 0 && board[z - 1][y][x] == null);  // 向上滑动
+        boolean canMoveDown = (z + 1 < layers && board[z + 1][y][x] == null);  // 向下滑动
+        boolean canMoveLeft = (x - 1 >= 0 && board[z][y][x - 1] == null);  // 向左滑动
+        boolean canMoveRight = (x + 1 < cols && board[z][y][x + 1] == null);  // 向右滑动
 
-        return leftFree || rightFree;
+        // 判断是否有方向可以滑动
+        return canMoveUp || canMoveDown || canMoveLeft || canMoveRight;
     }
 }

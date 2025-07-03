@@ -1,5 +1,6 @@
 package com.maj.view;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -12,6 +13,7 @@ import com.kw.gdx.d3.actor.ModelActor3D;
  */
 public class MahJItem extends ModelActor3D {
     private int suit;
+    private boolean canTouch;
 
     public MahJItem(Model model) {
         super(model);
@@ -74,5 +76,19 @@ public class MahJItem extends ModelActor3D {
 
     public void setMajNull(MahJItem[][][] mahJItem) {
         mahJItem[posz][posy][posx] = null;
+    }
+
+    public void setCannotMove() {
+        setColor(Color.BLACK);
+        canTouch = false;
+    }
+
+    public boolean isCanTouch() {
+        return canTouch;
+    }
+
+    public void setCanMove(){
+        setColor(Color.WHITE);
+        canTouch = true;
     }
 }
