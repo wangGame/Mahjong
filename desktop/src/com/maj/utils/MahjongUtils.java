@@ -22,17 +22,17 @@ public class MahjongUtils {
                     MahJItem mahJItem = board[z][y][x];
                     if (mahJItem != null) {
                         // 1. 检查是否被上方盖住
-                        if (isCovered(board, z, y, x)) {
+                        if (isCovered(board, x, y, z)) {
                             mahJItem.setCannotMove();
                             continue;
                         }
 
-//                        // 2. 检查是否左右有空间滑出
-//                        if (canSlideOut(board, x, y, z)) {
-//                            mahJItem.setCanMove();
-//                        } else {
-//                            mahJItem.setCannotMove();
-//                        }
+                        // 2. 检查是否左右有空间滑出
+                        if (canSlideOut(board, x, y, z)) {
+                            mahJItem.setCanMove();
+                        } else {
+                            mahJItem.setCannotMove();
+                        }
 
 //                        // 3. 检查该麻将是否可滑动
 //                        if (canMove(board, x, y, z)) {
@@ -46,17 +46,69 @@ public class MahjongUtils {
         }
     }
 
-    private static boolean isCovered(MahJItem[][][] board, int x, int y, int z) {
-        if(x + 1 <= board.length-1){
-            if (board[x+1][y][z] !=null) {
+    private static boolean canSlideOut(MahJItem[][][] board, int x, int y, int z) {
+        if (x + 2<board[0][0].length) {
+            boolean rightF = false;
+            boolean rightFF = false;
+            boolean rightFB = false;
+
+            if (board[z][y][x + 2] == null) {
+                rightF = true;
+            }
+            if (y+1<board[0].length) {
+                if (board[z][y + 1][x + 2] == null) {
+                    rightFF = true;
+                }
+            }
+            if (y-1>=0){
+                if (board[z][y - 1][x + 2] == null) {
+                    rightFB = true;
+                }
+            }
+
+            if (rightFF&&rightFB&&rightF){
+                return true;
+            }
+        }
+        if (x - 2>=0) {
+            boolean leftF = false;
+            boolean leftFF = false;
+            boolean leftFB = false;
+
+            if (board[z][y][x - 2] == null) {
+                leftF = true;
+            }
+            if (y-1>=0) {
+                if (board[z][y - 1][x - 2] == null) {
+                    leftFF = true;
+                }
+            }
+            if (y+1<board[0].length) {
+                if (board[z][y + 1][x - 2] == null) {
+                    leftFB = true;
+                }
+            }
+
+            if (leftF&&leftFF&&leftFB){
                 return true;
             }
 
-            if (z-1>=0) {
-                if (board[x+1][y][z-1] !=null) {
-                    return true;
-                }
+
+
+
+
+
+        }
+
+        return false;
+    }
+
+    private static boolean isCovered(MahJItem[][][] board, int x, int y, int z) {
+        if(z + 1 <= board.length-1){
+            if (board[z+1][y+1][x] !=null) {
+                return true;
             }
+
         }
         return false;
     }

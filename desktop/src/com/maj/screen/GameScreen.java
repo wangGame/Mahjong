@@ -127,22 +127,23 @@ public class GameScreen extends BaseScreen3D {
             suit++;
             tempAll.removeAll(towItems,false);
         }
+
+        for (MahJItem[][] mahJItems : mahJItem) {
+            System.out.println("==============================");
+            for (MahJItem[] jItem : mahJItems) {
+                System.out.println();
+                for (MahJItem item : jItem) {
+                    if (item!=null) {
+                        System.out.print(item);
+                    }else {
+                        System.out.print("      ");
+                    }
+                }
+            }
+            System.out.println();
+        }
         MahjongUtils.getClickableTiles(mahJItem);
 
-//        for (MahJItem[][] mahJItems : mahJItem) {
-//            System.out.println("==============================");
-//            for (MahJItem[] jItem : mahJItems) {
-//                System.out.println();
-//                for (MahJItem item : jItem) {
-//                    if (item!=null) {
-//                        System.out.print("1     ");
-//                    }else {
-//                        System.out.print("      ");
-//                    }
-//                }
-//            }
-//            System.out.println();
-//        }
     }
 
 

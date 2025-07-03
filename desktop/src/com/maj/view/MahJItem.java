@@ -91,4 +91,13 @@ public class MahJItem extends ModelActor3D {
         setColor(Color.WHITE);
         canTouch = true;
     }
+
+    @Override
+    public String toString() {
+        return "MahJItem{" +
+                "posx=" + posx +
+                ", posy=" + posy +
+                ", posz=" + posz +
+                '}';
+    }
 }
