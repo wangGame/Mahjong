@@ -20,9 +20,10 @@ public class MahJItem extends ModelActor3D {
     }
 
     public void setSuit(int suit) {
-        this.suit = suit;
+
 
         suit = suit % 33 +1;
+        this.suit = suit;
         Texture woodTexture = Asset.getAsset().getTexture("tile/mahjong_tile_"+suit+".png");
         woodTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         woodTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);

@@ -59,11 +59,15 @@ public class MahjongUtils {
                 if (board[z][y + 1][x + 2] == null) {
                     rightFF = true;
                 }
+            }else {
+                rightFF = true;
             }
             if (y-1>=0){
                 if (board[z][y - 1][x + 2] == null) {
                     rightFB = true;
                 }
+            }else {
+                rightFB = true;
             }
 
             if (rightFF&&rightFB&&rightF){
@@ -82,11 +86,15 @@ public class MahjongUtils {
                 if (board[z][y - 1][x - 2] == null) {
                     leftFF = true;
                 }
+            }else {
+                leftFF = true;
             }
             if (y+1<board[0].length) {
                 if (board[z][y + 1][x - 2] == null) {
                     leftFB = true;
                 }
+            }else {
+                leftFB = true;
             }
 
             if (leftF&&leftFF&&leftFB){
@@ -105,10 +113,23 @@ public class MahjongUtils {
 
     private static boolean isCovered(MahJItem[][][] board, int x, int y, int z) {
         if(z + 1 <= board.length-1){
-            if (board[z+1][y+1][x] !=null) {
-                return true;
-            }
+            boolean zUp = false;
 
+            boolean upLeft = false;
+            boolean uLeftF = false;
+            boolean uLeftB = false;
+
+            boolean upRight = false;
+            boolean upRightF = false;
+            boolean upRightB = false;
+
+            if (z+1<board.length && y+1<board[0].length) {
+                if (board[z + 1][y + 1][x] != null) {
+                    return true;
+                }
+            }
+        }else {
+            return true;
         }
         return false;
     }

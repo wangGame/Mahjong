@@ -157,8 +157,19 @@ public class GameScreen extends BaseScreen3D {
                     if (!isCanTouch())return;
                     selectActor = this;
                     setColor(Color.GRAY);
+                    Vector3 position1 = selectActor.getPosition();
+                    selectActor.addAction(
+                            Action3Ds.forever3D(
+                                Action3Ds.sequenceAction3D(
+                                        Action3Ds.moveToAction3D(position1.x+1,position1.y,position1.z,0.2f,Interpolation.slowFast),
+                                        Action3Ds.moveToAction3D(position1.x-1,position1.y,position1.z,0.2f,Interpolation.slowFast),
+                                        Action3Ds.delay3D(0.2f)
+                                )
+                            )
+                    );
                 }else {
                     if (!isCanTouch())return;
+                    selectActor.clearActions();
                     if (selectActor == this){
                         setColor(Color.WHITE);
                         return;
