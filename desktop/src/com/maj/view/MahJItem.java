@@ -80,7 +80,7 @@ public class MahJItem extends ModelActor3D {
     }
 
     public void setCannotMove() {
-        setColor(Color.BLACK);
+        setColor(Color.BROWN);
         canTouch = false;
     }
 
