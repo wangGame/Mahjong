@@ -14,6 +14,6 @@ public class MajGame extends BaseGame {
     @Override
     public void create() {
         super.create();
-        setScreen(new NewGameScreen(this));
+        setScreen(new LoadScreen( this));
     }
 }

@@ -4,19 +4,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.kw.gdx.BaseGame;
 import com.kw.gdx.asset.Asset;
-import com.kw.gdx.constant.Constant;
-import com.kw.gdx.d3.action.Action3D;
 import com.kw.gdx.d3.action.Action3Ds;
-import com.kw.gdx.d3.actor.BaseActor3D;
 import com.kw.gdx.d3.actor.BaseActor3DGroup;
 import com.kw.gdx.d3.actor.ModelActor3D;
 import com.kw.gdx.d3.asset.Asset3D;
@@ -28,8 +22,6 @@ import com.maj.data.ReadData;
 import com.maj.utils.MahjongUtils;
 import com.maj.view.MahJItem;
 
-import java.util.List;
-
 /**
  * Author by tony
  * Date on 2025/6/29.
@@ -37,13 +29,17 @@ import java.util.List;
 public class GameScreen extends BaseScreen3D {
     private MahJItem selectActor;
     private MahJItem mahJItem[][][];
+    private Array<MahJItem> allMajItem;
+
     public GameScreen(BaseGame game) {
         super(game);
+
     }
 
     @Override
     public void initView() {
         super.initView();
+        allMajItem = new Array<>();
         {
             Model bgModel = Asset3D.getAsset3D().getModel("maj/table.g3db");
             ModelActor3D tableActor3D = new ModelActor3D(bgModel);
@@ -94,7 +90,7 @@ public class GameScreen extends BaseScreen3D {
         BaseActor3DGroup gr = new BaseActor3DGroup();
         stage3D.addActor(gr);
         gr.setPosition(0,0,0);
-        Array<MahJItem> tilesAll = new Array<>();
+
         mahJItem = new MahJItem[9][15][36];
 
         for (int i3 = 0; i3 < entries.size; i3++) {
@@ -108,7 +104,7 @@ public class GameScreen extends BaseScreen3D {
                         if (s.charAt(i2) == '1') {
                             MahJItem model = createModel(i2, i1, i3);
                             gr.addActor3D(model);
-                            tilesAll.add(model);
+                            allMajItem.add(model);
                             mahJItem[i3][i1][i2] = model;
                         }
                     }
@@ -116,7 +112,7 @@ public class GameScreen extends BaseScreen3D {
             }
         }
 
-        Array<MahJItem> tempAll = new Array<>(tilesAll);
+        Array<MahJItem> tempAll = new Array<>(allMajItem);
         LevelLogic levelLogic = new LevelLogic();
         int suit = 0;
         while (tempAll.size>0) {
@@ -128,8 +124,12 @@ public class GameScreen extends BaseScreen3D {
             tempAll.removeAll(towItems,false);
         }
 
+
+
+
+
+
         for (MahJItem[][] mahJItems : mahJItem) {
-            System.out.println("==============================");
             for (MahJItem[] jItem : mahJItems) {
                 System.out.println();
                 for (MahJItem item : jItem) {
@@ -143,9 +143,7 @@ public class GameScreen extends BaseScreen3D {
             System.out.println();
         }
         MahjongUtils.getClickableTiles(mahJItem);
-
     }
-
 
     public MahJItem createModel(int posx,int posy,int posz){
         Model model = Asset3D.getAsset3D().getModel("maj/mahjong_tile.g3db");
@@ -234,7 +232,9 @@ public class GameScreen extends BaseScreen3D {
         };
         actor3D.setArrPos(posx,posy,posz);
         actor3D.setScale(1,1,1);
-        actor3D.setPosition((posx- 18)*1,posz*1,(posy-8)*1.4f - 1.4f*posz);
+//        actor3D.setPosition((posx- 18)*1,posz*1,(posy-8)*1.4f - 1.4f*posz);
+        actor3D.setPosition((posx- 18)*1,posz,(posy-8)*1.4f - 1.4f*posz);
+
         BoundingBox boundingBox = new BoundingBox();
         actor3D.getModel().calculateBoundingBox(boundingBox);
         return actor3D;

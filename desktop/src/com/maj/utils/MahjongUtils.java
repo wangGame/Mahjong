@@ -1,6 +1,7 @@
 package com.maj.utils;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.utils.Array;
 import com.maj.view.MahJItem;
 
 import java.util.ArrayList;
@@ -123,13 +124,15 @@ public class MahjongUtils {
             boolean upRightF = false;
             boolean upRightB = false;
 
+
+
             if (z+1<board.length && y+1<board[0].length) {
                 if (board[z + 1][y + 1][x] != null) {
                     return true;
                 }
             }
         }else {
-            return true;
+            return false;
         }
         return false;
     }

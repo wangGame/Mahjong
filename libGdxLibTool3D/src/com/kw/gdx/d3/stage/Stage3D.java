@@ -100,7 +100,7 @@ public class Stage3D extends InputAdapter {
     }
 
     protected void initLight() {
-        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.1f, 0.1f, 0.1f, 1f));//环境光
+        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.5f, 0.5f, 0.5f, 1f));//环境光
         //投影
         shadowLight = new DirectionalShadowLight(1024, 1024, 300f, 300f,
                 1f, 100f);

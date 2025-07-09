@@ -34,7 +34,7 @@ public class ReadData {
         ArrayMap<Integer, Array<String>> levelData = new ArrayMap<>();
         String levelContent = allLevel[level];
         String contentSplit[] = levelContent.split(",");
-        int row = contentSplit.length / cengLine;
+
         for (int i = 0; i < 9; i++) {
             Array<String> strings = new Array<>();
             boolean flag = false;
