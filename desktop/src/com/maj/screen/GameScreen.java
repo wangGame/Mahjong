@@ -124,11 +124,6 @@ public class GameScreen extends BaseScreen3D {
             tempAll.removeAll(towItems,false);
         }
 
-
-
-
-
-
         for (MahJItem[][] mahJItems : mahJItem) {
             for (MahJItem[] jItem : mahJItems) {
                 System.out.println();
