@@ -3,6 +3,7 @@ package com.maj;
 import com.kw.gdx.BaseGame;
 import com.kw.gdx.resource.annotation.GameInfo;
 import com.maj.screen.LoadScreen;
+import com.maj.screen.NewGameScreen;
 
 /**
  * Author by tony
@@ -13,6 +14,6 @@ public class MajGame extends BaseGame {
     @Override
     public void create() {
         super.create();
-        setScreen(new LoadScreen(this));
+        setScreen(new NewGameScreen(this));
     }
 }
