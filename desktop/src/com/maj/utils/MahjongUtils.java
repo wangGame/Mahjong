@@ -115,6 +115,9 @@ public class MahjongUtils {
     private static boolean isCovered(MahJItem[][][] board, int x, int y, int z) {
         if(z + 1 <= board.length-1){
             boolean zUp = false;
+            boolean zUpF = false;
+            boolean zUpB = false;
+
 
             boolean upLeft = false;
             boolean uLeftF = false;
@@ -124,12 +127,27 @@ public class MahjongUtils {
             boolean upRightF = false;
             boolean upRightB = false;
 
+            System.out.println(x);
+
 
 
             if (z+1<board.length && y+1<board[0].length) {
-                if (board[z + 1][y + 1][x] != null) {
+                if (board[z + 1][y + 1 - 1][x] != null) {
                     zUp = true;
                 }
+                if (y+1 < board[0].length) {
+                    if (board[z + 1][y + 1][x] != null) {
+                        zUpF = true;
+                    }
+                }
+                if (y+2 < board[0].length) {
+                    if (board[z + 1][y + 2][x] != null) {
+                        zUpB = true;
+                    }
+                }
+
+
+                if (zUp || zUpB || zUpF)return true;
                 if (x-1>0) {
                     if (board[z + 1][y + 1 - 1][x - 1] != null) {
                         uLeftB = true;
