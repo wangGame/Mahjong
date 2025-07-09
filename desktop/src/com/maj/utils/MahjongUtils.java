@@ -125,9 +125,54 @@ public class MahjongUtils {
 
             if (z+1<board.length && y+1<board[0].length) {
                 if (board[z + 1][y + 1][x] != null) {
-                    return true;
+                    zUp = true;
                 }
+                if (x-1>0) {
+                    if (board[z + 1][y + 1 - 1][x - 1] != null) {
+                        uLeftB = true;
+                    }
+
+                    if (board[z + 1][y+1][x - 1] != null) {
+                        upLeft = true;
+                    }
+                    if (y+2<board[0].length)
+                    if (board[z + 1][y+2][x - 1] != null) {
+                        uLeftF = true;
+                    }
+                }else {
+                    upLeft = true;
+                    uLeftF = true;
+                    uLeftB = true;
+                }
+
+                if (upLeft || uLeftF || uLeftB)return true;
+
+                if (x+1<board[0][0].length) {
+                    if (board[z + 1][y + 1 - 1][x + 1] != null) {
+                        upRightB = true;
+                    }
+
+                    if (board[z + 1][y+1][x + 1] != null) {
+                        upRight = true;
+                    }
+                    if (y+2<board[0].length)
+                    if (board[z + 1][y+2][x + 1] != null) {
+                        upRightF = true;
+                    }
+                }else {
+                    upRight = true;
+                    upRightF = true;
+                    upRightB = true;
+                }
+
+
+                if (upRightB || upRight || upRightF)return true;
+
+            }else {
+                return true;
             }
+
+
         }else {
             return true;
         }
